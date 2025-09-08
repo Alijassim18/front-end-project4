@@ -28,8 +28,8 @@ const LoginPage = () => {
 
       alert("Login successful!");
 
-      if (role === "customer") {
-        window.location.href = "/customer";
+      if (role === "supervisor") {
+        window.location.href = "/super";
       } else if (role === "admin") {
         window.location.href = "/admin";
       } else {

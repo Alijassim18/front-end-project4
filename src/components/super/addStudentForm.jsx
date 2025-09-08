@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import NavBarSuper from './navBarSuper'
 import axios from 'axios'
 
 function SignUp() {
@@ -11,19 +12,21 @@ function SignUp() {
   const handleSubmit = async event => {
     event.preventDefault()
     try {
-      await axios.post('http://localhost:3000/super/students', {
+      await axios.post('http://localhost:3000/super/register-student', {
         name,
         email,
         password
       })
-      alert('User registered, please login')
-      navigate('')
+      alert('User registered')
+      navigate('super-addStudent')
     } catch (err) {
       alert(err.response?.data?.message || 'Registration failed')
     }
   }
 
   return (
+    <>
+ <NavBarSuper/>
     <form onSubmit={handleSubmit}>
       <h2>Add Student</h2>
 
@@ -49,7 +52,7 @@ function SignUp() {
       />
 
       <button type="submit">Add</button>
-    </form>
+    </form></>
   )
 }
 

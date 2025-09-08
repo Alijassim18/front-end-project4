@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import NavBarSuper from './navBarSuper'
 
-function SignUp() {
+function SignUpAdmins() {
     const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
@@ -11,19 +12,21 @@ function SignUp() {
   const handleSubmit = async event => {
     event.preventDefault()
     try {
-      await axios.post('http://localhost:3000/super/admins', {
+      await axios.post('http://localhost:3000/super/register-admin', {
         name,
         email,
         password
       })
-      alert('User registered, please login')
-      navigate('')
+      alert('User registered')
+      navigate('/super-addAdmin')
     } catch (err) {
       alert(err.response?.data?.message || 'Registration failed')
     }
   }
 
   return (
+    <>
+    <NavBarSuper/>
     <form onSubmit={handleSubmit}>
       <h2>Add admin</h2>
 
@@ -49,8 +52,8 @@ function SignUp() {
       />
 
       <button type="submit">Add</button>
-    </form>
+    </form></>
   )
 }
 
-export default SignUp
+export default SignUpAdmins
