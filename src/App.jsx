@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import AddExamForm from "./components/exam/FormExam"
 import ExamList from "./components/exam/ListAllExam"
 import MainPagesExam from "./components/exam/mainExam"
+import UpdateExamForm from "./components/exam/updatePage"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/addExam" element={<AddExamForm/>} />
         <Route path="/list-allExam" element={<ExamList/>} />
         <Route path="/admin" element={<MainPagesExam/>}/>
+        <Route path="/update-exam" element={<UpdateExamForm/>}/>
       </Routes>
     </Router>
   )

@@ -3,18 +3,19 @@ import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import NavBarExam from "./NavBarExam";
 import ExamDeleteButton from "./deltebtn";
+import UpdateExamForm from "./updatePage";
 
 const baseUrl = "http://localhost:3000";
 
 const ExamList = () => {
   const [exam, setExam] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editingExam, setEditingExam] = useState(null); // ✅ track which exam is being edited
 
   const getAllExam = async () => {
     try {
       const url = `${baseUrl}/exam/`;
       const response = await axios.get(url);
-      console.log("API response:", response);
       setExam(response.data);
     } catch (error) {
       console.log("error:", error);
@@ -26,6 +27,19 @@ const ExamList = () => {
   useEffect(() => {
     getAllExam();
   }, []);
+
+  if (editingExam) {
+    // Render the update form for the selected exam
+    return (
+      <UpdateExamForm
+        exam={editingExam}
+        setFormIsShown={() => {
+          setEditingExam(null); // go back to exam list after updating
+          getAllExam(); // refresh list
+        }}
+      />
+    );
+  }
 
   return (
     <div>
@@ -48,7 +62,7 @@ const ExamList = () => {
                 {new Date(oneExam.endDate).toLocaleString()}
               </p>
 
-           
+              <button onClick={() => setEditingExam(oneExam)}>Update</button>
               <ExamDeleteButton examId={oneExam._id} />
             </li>
           ))}
