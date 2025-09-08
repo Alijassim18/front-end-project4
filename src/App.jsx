@@ -9,7 +9,7 @@ import ExamList from "./components/exam/ListAllExam";
 import MainPagesExam from "./components/exam/mainExam";
 import UpdateExamForm from "./components/exam/updatePage";
 import StudentExamList from "./components/student/listExamStu";
-
+import StudentExamPage from "./components/student/Exampage";
 
 
 
@@ -27,8 +27,7 @@ function App() {
         <Route path="/admin" element={<MainPagesExam />} />
         <Route path="/update-exam" element={<UpdateExamForm />} />
         <Route path="/student" element={<StudentExamList />} />
-        
-      
+        <Route path="/student/exam/:examId" element={<StudentExamPage />} />
       </Routes>
     </Router>
   );
