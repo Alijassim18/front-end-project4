@@ -18,7 +18,6 @@ const StudentExamList = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setExams(res.data);
-      console.log("Exams:", res.data); 
     } catch (err) {
       console.error("Error fetching exams:", err.response || err);
     }
@@ -30,7 +29,6 @@ const StudentExamList = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSubmissions(res.data);
-      console.log("Submissions:", res.data); 
     } catch (err) {
       console.error("Error fetching submissions:", err.response || err);
     }
@@ -46,9 +44,7 @@ const StudentExamList = () => {
   }, []);
 
   const hasSubmitted = (examId) => {
-    const submitted = submissions.some((sub) => sub.exam.toString() === examId.toString());
-    console.log(`Has submitted for exam ${examId}: ${submitted}`); 
-    return submitted;
+    return submissions.some((sub) => sub.exam.toString() === examId.toString());
   };
 
   const startExam = (examId) => {
@@ -61,9 +57,6 @@ const StudentExamList = () => {
 
   const viewGrade = (examId) => {
     const submission = submissions.find((sub) => sub.exam.toString() === examId.toString());
-    console.log("Viewing grade for exam:", examId);
-    console.log("Submission found:", submission);
-    
     if (submission) {
       navigate(`/student/grade/${submission._id}`);
     } else {
@@ -97,47 +90,14 @@ const StudentExamList = () => {
             const viewDisabled = !submitted;
 
             return (
-              <li key={exam._id} style={{ marginBottom: "20px" }}>
+              <li key={exam._id}>
                 <h3>{exam.title}</h3>
-                <p>
-                  <strong>Start:</strong> {start.toLocaleString()}
-                </p>
-                <p>
-                  <strong>End:</strong> {end.toLocaleString()}
-                </p>
-                <button
-                  onClick={() => startExam(exam._id)}
-                  disabled={startDisabled}
-                  style={{
-                    marginRight: "10px",
-                    backgroundColor: submitted
-                      ? "#ccc"
-                      : now < start
-                      ? "#f0ad4e"
-                      : now > end
-                      ? "#d9534f"
-                      : "#5cb85c",
-                    color: "#fff",
-                    padding: "8px 12px",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: startDisabled ? "not-allowed" : "pointer",
-                  }}
-                >
+                <p><strong>Start:</strong> {start.toLocaleString()}</p>
+                <p><strong>End:</strong> {end.toLocaleString()}</p>
+                <button onClick={() => startExam(exam._id)} disabled={startDisabled}>
                   {startButtonText}
                 </button>
-                <button
-                  onClick={() => viewGrade(exam._id)}
-                  disabled={viewDisabled}
-                  style={{
-                    backgroundColor: submitted ? "#0275d8" : "#ccc",
-                    color: "#fff",
-                    padding: "8px 12px",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: viewDisabled ? "not-allowed" : "pointer",
-                  }}
-                >
+                <button onClick={() => viewGrade(exam._id)} disabled={viewDisabled}>
                   View Grade
                 </button>
               </li>
