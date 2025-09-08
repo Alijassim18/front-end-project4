@@ -6,7 +6,7 @@ const UpdateExamForm = ({ exam, setFormIsShown }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState(null);
 
-  // Pre-fill form data and fix datetime-local format
+
   useEffect(() => {
     if (exam) {
       setFormData({
@@ -31,7 +31,6 @@ const UpdateExamForm = ({ exam, setFormIsShown }) => {
     const updatedQuestions = [...formData.questions];
     updatedQuestions[index][name] = value;
 
-    // Update options when type changes
     if (name === "questionType") {
       if (value === "mcq") updatedQuestions[index].options = ["", ""];
       else if (value === "true_false") updatedQuestions[index].options = ["True", "False"];
