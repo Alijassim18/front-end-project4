@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const baseUrl = "http://localhost:3000";
+
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -18,25 +20,29 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/login", formData);
+      const res = await axios.post(`${baseUrl}/auth/login`, formData);
       const { token, role } = res.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", token); 
       }
       localStorage.setItem("role", role);
 
       alert("Login successful!");
 
+      
       if (role === "supervisor") {
         window.location.href = "/super";
       } else if (role === "admin") {
         window.location.href = "/admin";
+      } else if (role === "student") {
+        window.location.href = "/student"; 
       } else {
         window.location.href = "/";
       }
     } catch (err) {
-     return err
+      console.error("Login error:", err);
+      alert(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -47,28 +53,23 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit}>
         <h2>Login</h2>
 
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
 
-      
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-      
-
-        
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
 
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
