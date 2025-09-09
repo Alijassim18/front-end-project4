@@ -35,7 +35,7 @@ const GradePage = () => {
       <ul>
         {submission.answers.map((answer) => (
           <li key={answer.question}>
-            Question ID: {answer.question}, Your Answer: {answer.answer}, Points Earned: {answer.pointEarned}
+            Your Answer: {answer.answer}, Points Earned: {answer.pointEarned}
           </li>
         ))}
       </ul>

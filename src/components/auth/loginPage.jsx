@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
+import "./login.css"
 const baseUrl = "http://localhost:3000";
 
 const LoginPage = () => {
@@ -28,8 +28,7 @@ const LoginPage = () => {
       }
       localStorage.setItem("role", role);
 
-      alert("Login successful!");
-
+    
       
       if (role === "supervisor") {
         window.location.href = "/super";

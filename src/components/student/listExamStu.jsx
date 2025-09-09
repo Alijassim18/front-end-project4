@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
-
+import LogoutButton from "../logout";
 const baseUrl = "http://localhost:3000";
 
 const StudentExamList = () => {
@@ -68,6 +68,7 @@ const StudentExamList = () => {
 
   return (
     <div>
+<LogoutButton/>
       <h2>Available Exams</h2>
       {exams.length === 0 ? (
         <p>No exams available</p>

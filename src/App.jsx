@@ -1,9 +1,12 @@
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 import LoginPage from "./components/auth/loginPage";
 import SignUp from "./components/super/addStudentForm";
 import SignUpAdmins from "./components/super/addAdmins";
 import MainPages from "./components/super/mainPage";
 import UserList from "./components/super/ListAllUser";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddExamForm from "./components/exam/FormExam";
 import ExamList from "./components/exam/ListAllExam";
 import MainPagesExam from "./components/exam/mainExam";
@@ -11,26 +14,52 @@ import UpdateExamForm from "./components/exam/updatePage";
 import StudentExamList from "./components/student/listExamStu";
 import StudentExamPage from "./components/student/Exampage";
 import GradePage from "./components/student/gradePage";
-
+import "./App.css"
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  function handleLogin(newToken) {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
+  }
+
+  function handleLogout() {
+    setToken(null);
+    localStorage.removeItem("token");
+  }
+
+ 
+  if (token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      console.log("Decoded token:", decodedToken);
+    } catch (err) {
+      console.error("Invalid token:", err);
+      handleLogout();
+    }
+  }
+
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/super" element={<MainPages />} />
-        <Route path="/super-addStudent" element={<SignUp />} />
-        <Route path="/super-addAdmin" element={<SignUpAdmins />} />
-        <Route path="/list-allUser" element={<UserList />} />
-        <Route path="/addExam" element={<AddExamForm />} />
-        <Route path="/list-allExam" element={<ExamList />} />
-        <Route path="/admin" element={<MainPagesExam />} />
-        <Route path="/update-exam" element={<UpdateExamForm />} />
-        <Route path="/student" element={<StudentExamList />} />
-        <Route path="/student/exam/:examId" element={<StudentExamPage />} />
+      <div>
+        <Routes>
     
-        <Route path="/student/grade/:submissionId" element={<GradePage />} />
-      </Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/super-addStudent" element={<SignUp />} />
+          <Route path="/super-addAdmin" element={<SignUpAdmins />} />
+
+          <Route path="/super" element={<MainPages />} />
+          <Route path="/list-allUser" element={<UserList />} />
+          <Route path="/addExam" element={<AddExamForm />} />
+          <Route path="/list-allExam" element={<ExamList />} />
+          <Route path="/admin" element={<MainPagesExam />} />
+          <Route path="/update-exam" element={<UpdateExamForm />} />
+          <Route path="/student" element={<StudentExamList />} />
+          <Route path="/student/exam/:examId" element={<StudentExamPage />} />
+          <Route path="/student/grade/:submissionId" element={<GradePage />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

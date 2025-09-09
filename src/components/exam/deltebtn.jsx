@@ -6,7 +6,7 @@ const ExamDeleteButton = ({ ExamId,getAllExam }) => {
         console.log(ExamId)
         await deleteExam(ExamId)
         getAllExam
-                window.location.reload()
+      window.location.reload()
     }
     return (
         <button onClick={handleDelete}>Delete</button>

@@ -10,7 +10,7 @@ const baseUrl = "http://localhost:3000";
 const ExamList = () => {
   const [exam, setExam] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editingExam, setEditingExam] = useState(null); // ✅ track which exam is being edited
+  const [editingExam, setEditingExam] = useState(null); 
 
   const getAllExam = async () => {
     try {
@@ -29,13 +29,13 @@ const ExamList = () => {
   }, []);
 
   if (editingExam) {
-    // Render the update form for the selected exam
+
     return (
       <UpdateExamForm
         exam={editingExam}
         setFormIsShown={() => {
-          setEditingExam(null); // go back to exam list after updating
-          getAllExam(); // refresh list
+          setEditingExam(null); 
+          getAllExam(); 
         }}
       />
     );
@@ -47,7 +47,7 @@ const ExamList = () => {
       <h2>Exam List</h2>
 
       {loading ? (
-        <ClipLoader color="#FF00FF" size={40} />
+        <ClipLoader color="#FF00FF"  />
       ) : exam.length ? (
         <ul>
           {exam.map((oneExam) => (
@@ -63,7 +63,8 @@ const ExamList = () => {
               </p>
 
               <button onClick={() => setEditingExam(oneExam)}>Update</button>
-              <ExamDeleteButton examId={oneExam._id} />
+              
+              <ExamDeleteButton getAllExam={getAllExam} ExamId={oneExam._id} />
             </li>
           ))}
         </ul>

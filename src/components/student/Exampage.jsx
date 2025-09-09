@@ -44,7 +44,7 @@ const StudentExamPage = () => {
         }
       } catch (err) {
         console.error(err);
-        alert(err.response?.data?.message || err.message);
+       
       } finally {
         setLoading(false);
       }
@@ -83,21 +83,21 @@ const StudentExamPage = () => {
 
     try {
       const res = await axios.post(
-        `${baseUrl}/student/`,
+        `${baseUrl}/student/submit`,
         { examId, answers },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      alert("Exam submitted! Score: " + res.data.totalScore);
+      print("Exam submitted! Score: " + res.data.totalScore);
       navigate("/student");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Error submitting exam");
+
     } finally {
       setSubmitting(false);
     }
   };
 
-  if (loading) return <ClipLoader color="#FF00FF" size={40} />;
+  if (loading) return <ClipLoader color="#FF00FF" />;
   if (!exam) return <p>Exam not found</p>;
   if (alreadySubmitted) return <p>You have already submitted this exam.</p>;
 
@@ -107,14 +107,14 @@ const StudentExamPage = () => {
   return (
     <div>
       <h2>{exam.title}</h2>
-      <p><strong>Start:</strong> {new Date(exam.startDate).toLocaleString()}</p>
-      <p><strong>End:</strong> {new Date(exam.endDate).toLocaleString()}</p>
-      <p><strong>Time Left:</strong> {formatTime(timeLeft)}</p>
+      <p>Start: {new Date(exam.startDate).toLocaleString()}</p>
+      <p>End: {new Date(exam.endDate).toLocaleString()}</p>
+      <p>Time Left: {formatTime(timeLeft)}</p>
 
       <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
         {exam.questions.map((q, index) => (
           <div key={q._id} style={{ marginBottom: "15px" }}>
-            <p><strong>Q{index + 1}:</strong> {q.text} ({q.point} pts)</p>
+            <p>Q{index + 1}: {q.text} ({q.point} pts)</p>
 
             {q.questionType === "mcq" &&
               q.options.map((opt, i) => (

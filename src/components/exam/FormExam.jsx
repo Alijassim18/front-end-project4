@@ -16,7 +16,7 @@ const AddExamForm = ({ setFormIsShown }) => {
         text: "",
         answer: "",
         point: 1,
-        options: [""], // options for MCQ or True/False
+        options: [""], 
       },
     ],
   })
@@ -31,7 +31,7 @@ const AddExamForm = ({ setFormIsShown }) => {
     const updatedQuestions = [...formData.questions]
     updatedQuestions[index][name] = value
 
-    // Reset options when changing type
+ 
     if (name === "questionType") {
       if (value === "mcq") {
         updatedQuestions[index].options = ["", ""]
@@ -105,7 +105,7 @@ const AddExamForm = ({ setFormIsShown }) => {
       <NavBarExam />
       <h2>Add New Exam</h2>
       <form onSubmit={handleSubmit}>
-        {/* Exam Info */}
+    
         <label htmlFor="title">Title:</label>
         <input
           id="title"
@@ -145,7 +145,7 @@ const AddExamForm = ({ setFormIsShown }) => {
           required
         />
 
-        {/* Questions */}
+     
         <h3>Questions</h3>
         {formData.questions.map((q, index) => (
           <div key={index} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
@@ -169,7 +169,7 @@ const AddExamForm = ({ setFormIsShown }) => {
               required
             />
 
-            {/* Dynamic Options */}
+         
             {q.questionType === "mcq" && (
               <div>
                 <h4>Options:</h4>
