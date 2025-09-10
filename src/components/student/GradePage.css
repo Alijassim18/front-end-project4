@@ -1,0 +1,60 @@
+.grade-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+.grade-back-btn {
+  background-color: #ff00ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.grade-back-btn:hover {
+  background-color: #e600e6;
+}
+
+.grade-title {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.grade-total, .grade-submitted {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.grade-answers-title {
+  margin-top: 20px;
+}
+
+.grade-answers-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.grade-answer-item {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.grade-question {
+  font-weight: bold;
+}
+
+.grade-points {
+  font-weight: bold;
+}
+
+.grade-loading {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 50px;
+}

@@ -1,11 +1,14 @@
 import NavBarSuper from "./navBarSuper"
+
 const MainPages = () => {
-return(
+  const name = localStorage.getItem("name") 
+
+  return (
     <>
-        <NavBarSuper/>
-        <h1>Welcome super</h1>
+      <NavBarSuper />
+      <h1>Welcome Back Supervisor {name}!</h1>
     </>
-)
+  )
 }
 
 export default MainPages

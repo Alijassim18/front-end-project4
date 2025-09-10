@@ -6,8 +6,9 @@ const NavBarSuper = () => {
   return (
     <div className="navbar-super">
       <div className="nav-links">
-        <Link to="/super-addAdmin" className="nav-link">Admins</Link>
-        <Link to="/super-addStudent" className="nav-link">Students</Link>
+            <Link to="/super" className="nav-link">Home</Link>
+        <Link to="/super-addAdmin" className="nav-link">New Admin</Link>
+        <Link to="/super-addStudent" className="nav-link">New Student</Link>
         <Link to="/list-allUser" className="nav-link">Users</Link>
       </div>
       <LogoutButton />

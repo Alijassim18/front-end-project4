@@ -16,34 +16,39 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const res = await axios.post(`${baseUrl}/auth/login`, formData);
-      const { token, role } = res.data;
+  try {
+    const res = await axios.post(`${baseUrl}/auth/login`, formData);
+    const { token, role, name } = res.data;
 
-      if (token) {
-        localStorage.setItem("token", token);
-      }
-      localStorage.setItem("role", role);
-
-      if (role === "supervisor") {
-        window.location.href = "/super";
-      } else if (role === "admin") {
-        window.location.href = "/admin";
-      } else if (role === "student") {
-        window.location.href = "/student";
-      } else {
-        window.location.href = "/";
-      }
-    } catch (err) {
-      console.error("Login error:", err);
-      alert(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
+    if (token) {
+      localStorage.setItem("token", token);
     }
-  };
+    if (role) {
+      localStorage.setItem("role", role);
+    }
+    if (name) {
+      localStorage.setItem("name", name);
+    }
+
+    if (role === "supervisor") {
+      window.location.href = "/super";
+    } else if (role === "admin") {
+      window.location.href = "/admin";
+    } else if (role === "student") {
+      window.location.href = "/student";
+    } else {
+      window.location.href = "/";
+    }
+  } catch (err) {
+    console.error("Login error:", err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="login-container">

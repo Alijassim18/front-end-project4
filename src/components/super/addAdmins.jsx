@@ -18,7 +18,7 @@ function SignUpAdmins() {
         email,
         password
       })
-      navigate('/super-addAdmin')
+ window.location.reload();
     } catch (err) {
     return err
     }

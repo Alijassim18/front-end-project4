@@ -18,7 +18,7 @@ function SignUp() {
         email,
         password
       })
-      navigate('super-addStudent')
+     window.location.reload();
     } catch (err) {
      return err
     }

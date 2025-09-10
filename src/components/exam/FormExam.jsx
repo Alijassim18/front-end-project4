@@ -2,10 +2,10 @@ import { useState } from "react"
 import { createNewExam } from "../../../lib/exam/api"
 import NavBarExam from "./NavBarExam"
 import "./addExamForm.css";
-
+import { useNavigate } from "react-router-dom";
 const AddExamForm = ({ setFormIsShown }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-
+const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     startDate: "",
@@ -91,7 +91,7 @@ const AddExamForm = ({ setFormIsShown }) => {
 
       if (response.status === 201) {
         setFormIsShown(false)
-        window.location.reload()
+      window.location.reload()
       }
     } catch (err) {
       console.error("Error creating exam:", err)

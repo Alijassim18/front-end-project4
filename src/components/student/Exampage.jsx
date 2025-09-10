@@ -87,7 +87,7 @@ const StudentExamPage = () => {
         { examId, answers },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      print("Exam submitted! Score: " + res.data.totalScore);
+      console.Console( res.data.totalScore)
       navigate("/student");
     } catch (err) {
       console.error(err);
@@ -105,64 +105,64 @@ const StudentExamPage = () => {
     `${Math.floor(s / 60).toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`;
 
   return (
-    <div>
-      <h2>{exam.title}</h2>
-      <p>Start: {new Date(exam.startDate).toLocaleString()}</p>
-      <p>End: {new Date(exam.endDate).toLocaleString()}</p>
-      <p>Time Left: {formatTime(timeLeft)}</p>
+  <div className="exam-container">
+  <h2>{exam.title}</h2>
+ 
+  <p className="time-left">Time Left: {formatTime(timeLeft)}</p>
 
-      <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-        {exam.questions.map((q, index) => (
-          <div key={q._id} style={{ marginBottom: "15px" }}>
-            <p>Q{index + 1}: {q.text} ({q.point} pts)</p>
+  <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+    {exam.questions.map((q, index) => (
+      <div key={q._id} className="question-card">
+        <p>Q{index + 1}: {q.text} ({q.point} pts)</p>
 
-            {q.questionType === "mcq" &&
-              q.options.map((opt, i) => (
-                <label key={i} style={{ display: "block" }}>
-                  <input
-                    type="radio"
-                    name={`q-${index}`}
-                    value={opt}
-                    checked={answers[index]?.answer === opt}
-                    onChange={(e) => handleChange(index, e.target.value)}
-                    disabled={finished || alreadySubmitted}
-                  />
-                  {opt}
-                </label>
-              ))}
-
-            {q.questionType === "true_false" &&
-              ["True", "False"].map((opt) => (
-                <label key={opt} style={{ display: "block" }}>
-                  <input
-                    type="radio"
-                    name={`q-${index}`}
-                    value={opt}
-                    checked={answers[index]?.answer === opt}
-                    onChange={(e) => handleChange(index, e.target.value)}
-                    disabled={finished || alreadySubmitted}
-                  />
-                  {opt}
-                </label>
-              ))}
-
-            {q.questionType === "text" && (
+        {q.questionType === "mcq" &&
+          q.options.map((opt, i) => (
+            <label key={i}>
               <input
-                type="text"
-                value={answers[index]?.answer || ""}
+                type="radio"
+                name={`q-${index}`}
+                value={opt}
+                checked={answers[index]?.answer === opt}
                 onChange={(e) => handleChange(index, e.target.value)}
                 disabled={finished || alreadySubmitted}
-                required
               />
-            )}
-          </div>
-        ))}
+              {opt}
+            </label>
+          ))}
 
-        <button type="submit" disabled={submitting || finished || alreadySubmitted}>
-          {submitting ? "Submitting..." : "Submit Exam"}
-        </button>
-      </form>
-    </div>
+        {q.questionType === "true_false" &&
+          ["True", "False"].map((opt) => (
+            <label key={opt}>
+              <input
+                type="radio"
+                name={`q-${index}`}
+                value={opt}
+                checked={answers[index]?.answer === opt}
+                onChange={(e) => handleChange(index, e.target.value)}
+                disabled={finished || alreadySubmitted}
+              />
+              {opt}
+            </label>
+          ))}
+
+        {q.questionType === "text" && (
+          <input
+            type="text"
+            value={answers[index]?.answer || ""}
+            onChange={(e) => handleChange(index, e.target.value)}
+            disabled={finished || alreadySubmitted}
+            required
+          />
+        )}
+      </div>
+    ))}
+
+    <button type="submit" className="submit-btn" disabled={submitting || finished || alreadySubmitted}>
+      {submitting ? "Submitting..." : "Submit Exam"}
+    </button>
+  </form>
+</div>
+
   );
 };
 
