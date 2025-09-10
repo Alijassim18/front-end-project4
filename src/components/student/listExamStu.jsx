@@ -3,6 +3,8 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import LogoutButton from "../logout";
+import "./StudentExamList.css"; 
+
 const baseUrl = "http://localhost:3000";
 
 const StudentExamList = () => {
@@ -48,10 +50,7 @@ const StudentExamList = () => {
   };
 
   const startExam = (examId) => {
-    if (hasSubmitted(examId)) {
-      alert("You have already submitted this exam!");
-      return;
-    }
+    if (hasSubmitted(examId)) return;
     navigate(`/student/exam/${examId}`);
   };
 
@@ -59,54 +58,66 @@ const StudentExamList = () => {
     const submission = submissions.find((sub) => sub.exam.toString() === examId.toString());
     if (submission) {
       navigate(`/student/grade/${submission._id}`);
-    } else {
-      alert("You have not submitted this exam yet!");
     }
   };
 
-  if (loading) return <ClipLoader color="#FF00FF" size={40} />;
+  if (loading) return <ClipLoader color="#FF00FF" size={40} className="loading-spinner" />;
 
   return (
-    <div>
-<LogoutButton/>
-      <h2>Available Exams</h2>
-      {exams.length === 0 ? (
-        <p>No exams available</p>
-      ) : (
-        <ul>
-          {exams.map((exam) => {
-            const now = new Date();
-            const start = new Date(exam.startDate);
-            const end = new Date(exam.endDate);
-            const submitted = hasSubmitted(exam._id);
+   
+<div className="studentExam-container">
+  <div className="studentExam-header">
+    <h2 className="studentExam-title">Available Exams</h2>
+    <LogoutButton />
+  </div>
+  {exams.length === 0 ? (
+    <p className="studentExam-noExams">No exams available</p>
+  ) : (
+    <ul className="studentExam-list">
+      {exams.map((exam) => {
+        const now = new Date();
+        const start = new Date(exam.startDate);
+        const end = new Date(exam.endDate);
+        const submitted = hasSubmitted(exam._id);
 
-            const startDisabled = submitted || now < start || now > end;
-            const startButtonText = submitted
-              ? "Completed"
-              : now < start
-              ? "Not Started"
-              : now > end
-              ? "Closed"
-              : "Start Exam";
-            const viewDisabled = !submitted;
+        const startDisabled = submitted || now < start || now > end;
+        const startButtonText = submitted
+          ? "Completed"
+          : now < start
+          ? "Not Started"
+          : now > end
+          ? "Closed"
+          : "Start Exam";
+        const viewDisabled = !submitted;
 
-            return (
-              <li key={exam._id}>
-                <h3>{exam.title}</h3>
-                <p><strong>Start:</strong> {start.toLocaleString()}</p>
-                <p><strong>End:</strong> {end.toLocaleString()}</p>
-                <button onClick={() => startExam(exam._id)} disabled={startDisabled}>
-                  {startButtonText}
-                </button>
-                <button onClick={() => viewGrade(exam._id)} disabled={viewDisabled}>
-                  View Grade
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
+        return (
+          <li key={exam._id} className="studentExam-item">
+            <h3 className="studentExam-item-title">{exam.title}</h3>
+            <p className="studentExam-item-date"><span>Start:</span> {start.toLocaleString()}</p>
+            <p className="studentExam-item-date"><span>End:</span> {end.toLocaleString()}</p>
+            <div className="studentExam-buttons">
+              <button
+                className="studentExam-btn startBtn"
+                onClick={() => startExam(exam._id)}
+                disabled={startDisabled}
+              >
+                {startButtonText}
+              </button>
+              <button
+                className="studentExam-btn gradeBtn"
+                onClick={() => viewGrade(exam._id)}
+                disabled={viewDisabled}
+              >
+                View Grade
+              </button>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</div>
+
   );
 };
 

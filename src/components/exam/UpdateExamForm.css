@@ -1,0 +1,94 @@
+.updateExam-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.updateExam-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateExam-input, .updateExam-select {
+  padding: 10px;
+  margin: 5px 0 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.updateExam-input:focus, .updateExam-select:focus {
+  border-color: #2575fc;
+  box-shadow: 0px 0px 6px rgba(37, 117, 252, 0.5);
+}
+
+.updateExam-question {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  background: #f9f9f9;
+}
+
+.updateExam-options {
+  margin: 10px 0;
+}
+
+.updateExam-option-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.updateExam-addBtn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2575fc;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.updateExam-addBtn:hover {
+  background: #1a5edb;
+}
+
+.updateExam-removeBtn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #e74c3c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.updateExam-removeBtn:hover {
+  background: #c0392b;
+}
+
+.updateExam-submitBtn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #27ae60;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.updateExam-submitBtn:hover {
+  background: #1e8449;
+}
+
+.loading-text {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 18px;
+  color: #555;
+}

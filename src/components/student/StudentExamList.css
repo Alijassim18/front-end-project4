@@ -1,0 +1,83 @@
+
+.studentExam-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+.studentExam-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.studentExam-noExams {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+}
+
+.studentExam-list {
+  list-style: none;
+  padding: 0;
+}
+
+.studentExam-item {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+.studentExam-item-title {
+  margin: 0 0 10px 0;
+  color: #34495e;
+}
+
+.studentExam-item-date {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.studentExam-item-date span {
+  font-weight: 600;
+}
+
+.studentExam-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.studentExam-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+}
+
+.startBtn {
+  background-color: #2575fc;
+}
+
+.startBtn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.gradeBtn {
+  background-color: #27ae60;
+}
+
+.gradeBtn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  display: block;
+  margin: 50px auto;
+}
