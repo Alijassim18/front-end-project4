@@ -1,0 +1,39 @@
+.userlist-container {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background: white;
+}
+
+.userlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.userlist-table thead {
+  background: linear-gradient(135deg, #2193b0, #6dd5ed);
+  color: white;
+}
+
+.userlist-table th,
+.userlist-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+
+.userlist-table th {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}

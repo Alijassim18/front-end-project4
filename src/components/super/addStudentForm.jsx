@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import NavBarSuper from './navBarSuper'
 import axios from 'axios'
+import './addStudent.css' 
 
 function SignUp() {
-    const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -25,33 +26,38 @@ function SignUp() {
 
   return (
     <>
- <NavBarSuper/>
-    <form onSubmit={handleSubmit}>
-      <h2>Add Student</h2>
+      <NavBarSuper />
+      <div className="signup-container">
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <h2 className="signup-title">Add Student</h2>
 
-      <input 
-        placeholder="Email"
-        type="email"
-        value={email}
-        onChange={event => setEmail(event.target.value)}
-      />
+          <input 
+            className="signup-input"
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+          />
 
-      <input 
-        placeholder="Name"
-        value={name}
-        onChange={event => setName(event.target.value)}
-      />
+          <input 
+            className="signup-input"
+            placeholder="Name"
+            value={name}
+            onChange={event => setName(event.target.value)}
+          />
 
+          <input 
+            className="signup-input"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={event => setPassword(event.target.value)}
+          />
 
-      <input 
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={event => setPassword(event.target.value)}
-      />
-
-      <button type="submit">Add</button>
-    </form></>
+          <button className="signup-button" type="submit">Add</button>
+        </form>
+      </div>
+    </>
   )
 }
 

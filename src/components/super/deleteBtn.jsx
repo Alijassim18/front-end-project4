@@ -1,5 +1,5 @@
 import { deleteUser } from "../../../lib/super/super"
-
+import './deletebtn.css'; 
 const UserDeleteButton = ({ AdminId,getAllUsers }) => {
 
     const handleDelete = async () => {
@@ -9,7 +9,7 @@ const UserDeleteButton = ({ AdminId,getAllUsers }) => {
                 window.location.reload()
     }
     return (
-        <button onClick={handleDelete}>Delete</button>
+        <button onClick={handleDelete} className="btn">Delete</button>
     )
 }
 
