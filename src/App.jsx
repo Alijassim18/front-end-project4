@@ -14,8 +14,6 @@ import UpdateExamForm from "./components/exam/updatePage";
 import StudentExamList from "./components/student/listExamStu";
 import StudentExamPage from "./components/student/Exampage";
 import GradePage from "./components/student/gradePage";
-import "./App.css"
-
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
 

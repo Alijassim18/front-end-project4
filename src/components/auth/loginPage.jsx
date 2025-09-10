@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import "./login.css"
 const baseUrl = "http://localhost:3000";
+import "./login.css";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -24,18 +24,16 @@ const LoginPage = () => {
       const { token, role } = res.data;
 
       if (token) {
-        localStorage.setItem("token", token); 
+        localStorage.setItem("token", token);
       }
       localStorage.setItem("role", role);
 
-    
-      
       if (role === "supervisor") {
         window.location.href = "/super";
       } else if (role === "admin") {
         window.location.href = "/admin";
       } else if (role === "student") {
-        window.location.href = "/student"; 
+        window.location.href = "/student";
       } else {
         window.location.href = "/";
       }
@@ -48,29 +46,31 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2 className="login-title">Login</h2>
 
-        <label>Email</label>
+        <label className="login-label">Email</label>
         <input
           type="email"
           name="email"
+          className="login-input"
           value={formData.email}
           onChange={handleChange}
           required
         />
 
-        <label>Password</label>
+        <label className="login-label">Password</label>
         <input
           type="password"
           name="password"
+          className="login-input"
           value={formData.password}
           onChange={handleChange}
           required
         />
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" className="login-button" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
       </form>
