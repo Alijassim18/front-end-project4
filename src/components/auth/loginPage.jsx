@@ -52,6 +52,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
+         <h1>Exam Managment System</h1>
       <form className="login-form" onSubmit={handleSubmit}>
         <h2 className="login-title">Login</h2>
 
