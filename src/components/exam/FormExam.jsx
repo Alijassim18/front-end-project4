@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { createNewExam } from "../../../lib/exam/api"
 import NavBarExam from "./NavBarExam"
+import "./addExamForm.css";
 
 const AddExamForm = ({ setFormIsShown }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -31,7 +32,6 @@ const AddExamForm = ({ setFormIsShown }) => {
     const updatedQuestions = [...formData.questions]
     updatedQuestions[index][name] = value
 
- 
     if (name === "questionType") {
       if (value === "mcq") {
         updatedQuestions[index].options = ["", ""]
@@ -103,55 +103,59 @@ const AddExamForm = ({ setFormIsShown }) => {
   return (
     <div>
       <NavBarExam />
-      <h2>Add New Exam</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className="form-title">Add New Exam</h2>
+      <form className="exam-form" onSubmit={handleSubmit}>
     
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="title" className="form-label">Title:</label>
         <input
           id="title"
           name="title"
+          className="form-input"
           value={formData.title}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="startDate">Start Date:</label>
+        <label htmlFor="startDate" className="form-label">Start Date:</label>
         <input
           id="startDate"
           type="datetime-local"
           name="startDate"
+          className="form-input"
           value={formData.startDate}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="endDate">End Date:</label>
+        <label htmlFor="endDate" className="form-label">End Date:</label>
         <input
           id="endDate"
           type="datetime-local"
           name="endDate"
+          className="form-input"
           value={formData.endDate}
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="timer">Timer (minutes):</label>
+        <label htmlFor="timer" className="form-label">Timer (minutes):</label>
         <input
           id="timer"
           type="number"
           name="timer"
+          className="form-input"
           value={formData.timer}
           onChange={handleChange}
           required
         />
 
-     
-        <h3>Questions</h3>
+        <h3 className="section-title">Questions</h3>
         {formData.questions.map((q, index) => (
-          <div key={index} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
-            <label>Type:</label>
+          <div key={index} className="question-card">
+            <label className="form-label">Type:</label>
             <select
               name="questionType"
+              className="form-select"
               value={q.questionType}
               onChange={(e) => handleQuestionChange(e, index)}
             >
@@ -160,81 +164,84 @@ const AddExamForm = ({ setFormIsShown }) => {
               <option value="text">Text</option>
             </select>
 
-            <label>Question Text:</label>
+            <label className="form-label">Question Text:</label>
             <input
               type="text"
               name="text"
+              className="form-input"
               value={q.text}
               onChange={(e) => handleQuestionChange(e, index)}
               required
             />
 
-         
             {q.questionType === "mcq" && (
-              <div>
+              <div className="options-section">
                 <h4>Options:</h4>
                 {q.options.map((opt, optIndex) => (
-                  <div key={optIndex}>
+                  <div key={optIndex} className="option-row">
                     <input
                       type="text"
                       value={opt}
+                      className="form-input option-input"
                       onChange={(e) => handleOptionChange(e, index, optIndex)}
                       required
                     />
-                    <button type="button" onClick={() => removeOption(index, optIndex)}>
+                    <button type="button" className="btn-remove" onClick={() => removeOption(index, optIndex)}>
                       Remove
                     </button>
                   </div>
                 ))}
-                <button type="button" onClick={() => addOption(index)}>
-                  + Add Option
+                <button type="button" className="btn-add" onClick={() => addOption(index)}>
+                   Add Option
                 </button>
               </div>
             )}
 
             {q.questionType === "true_false" && (
-              <div>
+              <div className="options-section">
                 <h4>Options:</h4>
                 {q.options.map((opt, optIndex) => (
                   <div key={optIndex}>
-                    <input type="text" value={opt} disabled />
+                    <input type="text" value={opt} className="form-input" disabled />
                   </div>
                 ))}
               </div>
             )}
 
-            <label>Answer:</label>
+            <label className="form-label">Answer:</label>
             <input
               type="text"
               name="answer"
+              className="form-input"
               value={q.answer}
               onChange={(e) => handleQuestionChange(e, index)}
               required
             />
 
-            <label>Point:</label>
+            <label className="form-label">Point:</label>
             <input
               type="number"
               name="point"
+              className="form-input"
               value={q.point}
               onChange={(e) => handleQuestionChange(e, index)}
               required
             />
 
             {formData.questions.length > 1 && (
-              <button type="button" onClick={() => removeQuestion(index)}>
+              <button type="button" className="btn-remove-question" onClick={() => removeQuestion(index)}>
                 Remove Question
               </button>
             )}
           </div>
         ))}
 
-        <button type="button" onClick={addQuestion}>
+        <button type="button" className="btn-add-question" onClick={addQuestion}>
            Add Question
         </button>
 
         <br />
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit" className="btn-submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </form>

@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBarExam from "./NavBarExam";
 import ExamDeleteButton from "./deltebtn";
 import UpdateExamForm from "./updatePage";
+import "./ExamList.css"; 
 
 const baseUrl = "http://localhost:3000";
 
@@ -29,7 +30,6 @@ const ExamList = () => {
   }, []);
 
   if (editingExam) {
-
     return (
       <UpdateExamForm
         exam={editingExam}
@@ -41,29 +41,24 @@ const ExamList = () => {
     );
   }
 
-  return (
+  return ( 
     <div>
-      <NavBarExam />
+     <NavBarExam />
       <h2>Exam List</h2>
 
       {loading ? (
-        <ClipLoader color="#FF00FF"  />
+        <div className="ClipLoader-container">
+          <ClipLoader color="#FF00FF" />
+        </div>
       ) : exam.length ? (
-        <ul>
+        <ul className="ExamList-ul">
           {exam.map((oneExam) => (
-            <li key={oneExam._id}>
+            <li key={oneExam._id} className="ExamList-li">
               <h3>{oneExam.title}</h3>
-              <p>
-                <strong>Start:</strong>{" "}
-                {new Date(oneExam.startDate).toLocaleString()}
-              </p>
-              <p>
-                <strong>End:</strong>{" "}
-                {new Date(oneExam.endDate).toLocaleString()}
-              </p>
+              <p>Start: {new Date(oneExam.startDate).toLocaleString()}</p>
+              <p>End: {new Date(oneExam.endDate).toLocaleString()}</p>
 
-              <button onClick={() => setEditingExam(oneExam)}>Update</button>
-              
+              <button className="update-btn" onClick={() => setEditingExam(oneExam)}>Update</button>
               <ExamDeleteButton getAllExam={getAllExam} ExamId={oneExam._id} />
             </li>
           ))}

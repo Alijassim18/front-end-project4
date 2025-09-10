@@ -1,13 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import LogoutButton from '../logout';
+import './NavBarExam.css'; 
+
 const NavBarExam = () => {
   return (
-    <div>
-      <Link to="/addExam">Add New Exam</Link>
-      <Link to="/list-allExam">List All Exam</Link>
-    <LogoutButton/>
+    <div className="navbar-exam">
+      <div className="nav-links">
+        <Link to="/addExam" className="nav-link">Add New Exam</Link>
+        <Link to="/list-allExam" className="nav-link">List All Exam</Link>
+      </div>
+      <LogoutButton/>
     </div>
   );
 };
 
-export default NavBarExam
+export default NavBarExam;
