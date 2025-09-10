@@ -17,10 +17,9 @@ function SignUp() {
         email,
         password
       })
-      alert('User registered')
       navigate('super-addStudent')
     } catch (err) {
-      alert(err.response?.data?.message || 'Registration failed')
+     return err
     }
   }
 
